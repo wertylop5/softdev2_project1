@@ -1,4 +1,4 @@
-# softdev2_project1
+# Terrific Teraffic
 
 ### Description
 
@@ -10,7 +10,7 @@ An interative map that can be used to view traffic related data in the US.
 
 ### Relevance/Significance
 
-In the near future, all of us will need to commute to a job, possibly by car. As such, it is imperative for us to gauge the current traffic situation in various metro areas across the US. It will help to make an informed decision on whether or not to accepted a job in a city known for congestion or based on trends (i.e. increasing amounts of traffic over the years).
+In the near future, all of us will need to commute to a job, possibly by car. As such, it is imperative for us to gauge the current traffic situation in various metro areas across the US. It will help to make an informed decision on whether or not to accept a job in a city known for congestion or based on trends (i.e. increasing amounts of traffic over the years).
 
 ### Interaction
 
