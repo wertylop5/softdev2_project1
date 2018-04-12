@@ -1,0 +1,6 @@
+.categorybtn {
+  width: 180px !important;
+  height: 100px !important;
+  white-space:normal !important;
+  word-wrap: break-word;
+}
