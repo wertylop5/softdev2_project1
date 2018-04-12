@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/custom.css" type="text/css">
+    <title> Teriffic Teraffic </title>
+    </head>
+  <body style="padding-top: 1rem;">
+  <center>
+  <h1 class="display-4"> TRAFFIC INFORMATION BY MEDIA MARKETS </h1>
+  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="btn btn-secondary btn-block"> Miles Per Vehicle </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-secondary btn-block"> Annual Congestion Cost </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-secondary btn-block"> Commuter Stress Index </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-secondary btn-block"> Annual Hours of Delay </button>
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-secondary btn-block"> Excess Fuel Consumed </button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-7">
+        <div class="card" style="height: 400px;">
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="card" style="height: 140px;">
+                <div class="text-left">
+                <h5 id="name"> New York, NY </h4>
+                Miles per Vehicle: <p id="milespervehicle" style="display: inline"> 10 </p>
+                <br>
+                Annual Congestion Cost: <p id="congestioncost"  style="display: inline"> </p>
+                <br>
+                Commuter Stress Index: <p id="commuterstress" style="display: inline"> </p>
+                <br>
+                Annual Hours of Delay: <p id="hoursofdelay" style="display: inline"> </p>
+                <br>
+                Excess Fuel Consumed: <p id="excessfuelconsumed" style="display: inline"> </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+              <div class="card" style="height: 240px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h4> TIME </h4>
+    <div class="row">
+      <div class="col">
+        <form>
+          <div class="form-group">
+            <input type="range" class="form-control-range" data-slider-min="1982" data-slider-max="2014"/>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-left"> 1982 </p>
+      </div>
+      <div class="col">
+        <p class="text-right"> 2014 </p>
+      </div>
+    </div>
+
+    <h4> SOURCES </h4>
+  </div>
+  </center>
+  </body>
+</html>
