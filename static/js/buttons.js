@@ -4,8 +4,8 @@ var csi = document.getElementById("csi");
 var ahd = document.getElementById("ahd");
 var efc = document.getElementById("efc");
 
-var switchinfo = function(e) {
-  mpv.innerHTML = "different information about miles";
+var switchinfo = function(e, id) {
+  mpv.innerHTML = "more description stuff";
 };
 
 var switchback = function(e) {
