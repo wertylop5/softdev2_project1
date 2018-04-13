@@ -2,7 +2,7 @@
 <html style="height: 100%">
   <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/custom.css" type="text/css">
+    <link rel="stylesheet" href="static/css/custom.css" type="text/css">
     <title> Teriffic Teraffic </title>
     </head>
   <body style="padding-top: 1rem;">
@@ -30,7 +30,7 @@
     <hr>
     <div class="row">
       <div class="col-7">
-        <div class="card" style="height: 400px;">
+        <div id="mapContainer" class="card" style="height: 400px;">
         </div>
       </div>
       <div class="col-5">
@@ -85,6 +85,12 @@
     <h4> SOURCES </h4>
   </div>
   </center>
+  <!-- libs -->
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- our code -->
   <script src="static/js/buttons.js"></script>
+  <script src="static/js/map.js"></script>
   </body>
 </html>

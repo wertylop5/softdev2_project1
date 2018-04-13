@@ -4,3 +4,11 @@
   white-space:normal !important;
   word-wrap: break-word;
 }
+
+.border {
+	fill: none;
+	stroke: #777;
+	stroke-width: .5;
+	stroke-opacity: .7;
+}
+
