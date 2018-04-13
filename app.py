@@ -7,14 +7,18 @@ app = Flask(__name__)
 def root():
 	return render_template("base.html")
 
-@app.route("/data", methods=["GET"])
+#used by the page to obtain csv data
+@app.route("/data", methods=["GET", "POST"])
 def data():
-	res = ""
+	temp = set()
+        res = ""
 	with open("data/traffic-data.csv") as data_file:
-		reader = csv.reader(data_file)
+		reader = csv.DictReader(data_file)
 		for row in reader:
-			print row
-			res += str(row)
+                        temp.add(row["Urban Area"])
+        for s in temp:
+            res += s
+            res += "<br>"
 	return res
 
 if __name__ == "__main__":
