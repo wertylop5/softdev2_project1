@@ -34,9 +34,23 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	let path = d3.geoPath(projection);
 	console.log("printing path");
 	console.log(path);
-
-	svg.append("path")
-		.datum(mesh)
-		.attr("class", "border")
-		.attr("d", path);
+    var defaultFill = "#aaa";
+    svg.append("g")
+	.attr("id","dmas")
+	.selectAll("path")
+	.data(feature.features)
+        .enter()
+	.append("path")
+	.attr("d", path)
+        .on("mouseover", function(d){
+	    d3.select(this)
+		.attr("fill","orange");
+	})
+        .on("mouseout", function(d){
+	    d3.select(this)
+		.attr("fill",defaultFill);
+	})
+	.attr("fill", defaultFill);
+    
+	
 });
