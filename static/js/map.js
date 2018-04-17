@@ -27,7 +27,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//defines the map projection to be used
 	//will attempt to fit the projection based on the geojson object
 	let projection = d3.geoAlbers()
-		.fitExtent([[20, 20], [615, 380]], feature);
+		.fitExtent([[20, 20], [width-20, height-20]], feature);
 
 	//defines d attribute of path tag
 	//the d attribute defines a curve
