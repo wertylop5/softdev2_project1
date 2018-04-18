@@ -1,4 +1,4 @@
-Urban Area,Year,Freeway Daily Vehicle-Miles of Travel,Arterial Street Daily Vehicle-Miles of Travel,Annual Excess Fuel Consumed Total Gallons,Excess fuel rank,Annual Excess Fuel Consumed Gallons per Auto Commuter,Excess fuel rank,Annual Hours of Delay per Auto Commuter,Delay per commuter ank,Commuter Stress Index Value,Stress index rank,Annual Congestion Cost Total Dollars (million),Congestion cost rank
+Urban Area,Year,Freeway Daily Vehicle-Miles of Travel,Arterial Street Daily Vehicle-Miles of Travel,Annual Excess Fuel Consumed Total Gallons,Excess fuel rank,Annual Excess Fuel Consumed Gallons per Auto Commuter,Excess fuel rank,Annual Hours of Delay per Auto Commuter,Delay per commuter rank,Commuter Stress Index Value,Stress index rank,Annual Congestion Cost Total Dollars (million),Congestion cost rank
 Akron OH,1982,2745,2120,916,74,2,62,5,95,1.03,98,97,75
 Akron OH,1983,3160,2380,1066,72,2,68,6,94,1.04,91,109,75
 Akron OH,1984,3290,2555,1363,71,3,54,7,90,1.04,94,134,72
