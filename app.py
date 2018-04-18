@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-import csv
+import csv, json
 
 app = Flask(__name__)
 
@@ -20,6 +20,12 @@ def data():
             res += s
             res += "<br>"
 	return res
+
+@app.route("/temp")
+def temp():
+	with open("data/traffic-data.json") as data_file:
+		data = json.load(data_file)
+		return str(data)
 
 if __name__ == "__main__":
 	app.debug = True
