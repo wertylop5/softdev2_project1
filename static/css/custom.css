@@ -42,3 +42,15 @@ th{
 .linethingy{
   margin: 0px !important;
 }
+
+.display-4 {
+  font-family: 'Do Hyeon', sans-serif;
+}
+
+h6 h5{
+  font-family: 'Open Sans', sans-serif;
+}
+
+btn{
+  border-width: 0px;
+}
