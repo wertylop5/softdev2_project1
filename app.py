@@ -21,11 +21,33 @@ def data():
             res += "<br>"
 	return res
 
-@app.route("/temp")
+@app.route("/traffic-temp")
 def temp():
+	names = set()
+	res = ""
+	#print traffic data names
 	with open("data/traffic-data.json") as data_file:
 		data = json.load(data_file)
-		return str(data)
+		for entry in data:
+			names.add(entry["Urban Area"])
+		for entry in names:
+			res += entry
+			res += "<br>"
+	return res
+
+@app.route("/nielsen-temp")
+def temp2():
+	names = set()
+	res = ""
+	#print traffic data names
+	with open("data/nielsentopo.json") as data_file:
+		data = json.load(data_file)
+		for entry in data["objects"]["nielsen_dma"]["geometries"]:
+			names.add(entry["properties"]["dma1"])
+		for entry in names:
+			res += entry
+			res += "<br>"
+	return res
 
 if __name__ == "__main__":
 	app.debug = True
