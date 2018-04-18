@@ -45,6 +45,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
         .on("mouseover", function(d){
 	    d3.select(this)
 		.attr("fill","orange");
+	    console.log(d.properties.dma1);
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
