@@ -25,7 +25,7 @@ def data():
 def temp():
 	names = set()
 	res = ""
-	
+	'''
 	bad = [
 	"Cincinnati OH-KY-IN",
 	"McAllen TX",
@@ -234,7 +234,6 @@ def temp():
 	"Tampa-St. Petersburg (Sarasota), FL"
 	]
 	
-	
 	#print traffic data names
 	with open("data/traffic-data.json") as data_file:
 		data = json.load(data_file)
@@ -245,13 +244,15 @@ def temp():
 				entry["Urban Area"] = good[index]
 			except ValueError:
 				pass
-		'''for entry in names:
+		"""for entry in names:
 			res += entry
-			res += "<br>"'''
+			res += "<br>""""
 		better = open("data/new.json", "w")
 		json.dump(data, better)
 		better.close()
 	return res
+	'''
+	return ""
 
 @app.route("/nielsen-temp")
 def temp2():
