@@ -46,8 +46,10 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	    d3.select(this)
 		.attr("fill","orange");
 	    console.log(d.properties.dma1);
-	    d3.select("#textbox")
-		.html('<center> <h5 id="name" style="font-size: 20px;">' + d.properties.dma1 + ' </h4> </center>');
+	    d3.select("#name")
+		.text(d.properties.dma1);
+	    d3.select("#data")
+		.text("yur"); 
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
