@@ -43,3 +43,6 @@ fixed naming of metro areas
 linS -- 2018-04-19 14:47:47
 added alt text to button
 
+linS -- 2018-04-20 14:31:32
+fixed rank table overflow
+
