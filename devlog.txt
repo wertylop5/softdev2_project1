@@ -46,3 +46,9 @@ added alt text to button
 linS -- 2018-04-20 14:31:32
 fixed rank table overflow
 
+linS -- 2018-04-20 14:47:59
+added descriptions to buttons
+
+korsunM -- 2018-04-20 14:48:42
+gets data from the year slider into the map
+

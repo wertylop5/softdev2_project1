@@ -7,19 +7,19 @@ var efc = document.getElementById("efc");
 var switchinfo = function(e, id) {
   let target = e.target.id;
   if (target === "mpv") {
-    mpv.innerHTML = "more description stuff";
+    mpv.innerHTML = "Average distance traveled per vehicle";
   }
   else if (target === "acc") {
-    acc.innerHTML = "more description stuff";
+    acc.innerHTML = "Extra fuel consumed by vehicles in traffic";
   }
   else if (target === "csi") {
-    csi.innerHTML = "more description stuff";
+    csi.innerHTML = "Travel time ratio, peak to off hours";
   }
   else if (target === "ahd") {
-    ahd.innerHTML = "more description stuff";
+    ahd.innerHTML = "Total hours of delay per year";
   }
   else if (target === "efc") {
-    efc.innerHTML = "more description stuff";
+    efc.innerHTML = "Excess fuel used per commuter (gallons)";
   }
 };
 
