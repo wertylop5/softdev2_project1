@@ -1,7 +1,13 @@
 "use strict";
 
 let width = 900, height = 500;
-
+var year;
+d3.select("#year")
+    .on("change",function(){
+	d3.select("#data")
+	    .text(this.value);
+	console.log(this.value);
+    });
 //should use an ajax call to get the data?
 d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/nielsentopo.json").then(data => {
 	console.log("printing data");
@@ -49,7 +55,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	    d3.select("#name")
 		.text(d.properties.dma1);
 	    d3.select("#data")
-		.text("yur"); 
+		.text("yur");
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
