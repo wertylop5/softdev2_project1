@@ -55,3 +55,6 @@ gets data from the year slider into the map
 linS -- 2018-04-22 18:30:28
 fixed misnamed media market
 
+linS -- 2018-04-22 19:28:44
+updated README
+
