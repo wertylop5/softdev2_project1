@@ -9,6 +9,8 @@ var csi = document.getElementById("csi");
 var ahd = document.getElementById("ahd");
 var efc = document.getElementById("efc");
 
+var pressed = mpv;
+
 var switchinfo = function(e, id) {
   let target = e.target.id;
   if (target === "mpv") {
@@ -47,10 +49,37 @@ var switchback = function(e) {
   }
 };
 
-for (let button of document.getElementsByClassName("data-button")) {
-  button.addEventListener("mouseover", switchinfo);
-  button.addEventListener("mouseout", switchback);
+for (let button of document.getElementsByClassName("data-button")){
+    button.addEventListener("mouseover", switchinfo);
+    button.addEventListener("mouseout", switchback);
+    button.addEventListener("click",function(e){
+	let target = e.target.id;
+	if (target === "mpv") {
+	    pressed = mpv ;
+	}
+	else if (target === "acc") {
+	    pressed = acc;
+	}
+	else if (target === "csi") {
+	    pressed = csi;
+	}
+	else if (target === "ahd") {
+	    pressed = ahd;
+	}
+	else if (target === "efc") {
+	    pressed = efc;
+	}
+	console.log(pressed.innerHTML);
+    });
 }
+			   
+
+			   
+			   
+			   
+			   
+    
+			   
 
 
 /*
@@ -112,7 +141,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	    d3.select("#name")
 		.text(d.properties.dma1);
 	    d3.select("#data")
-		.text("yur");
+		.html( pressed.innerHTML+ ":");
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
