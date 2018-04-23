@@ -24,11 +24,11 @@ According to the study some cities didn't have enough people and, as such, not a
 
 ### Visualization and interaction
 
-Our overall goal is a create an interactive heat map based on a specific data set. The website will initially show one data set, such as the Commuter Stress Index. A default year will be selected and the heatmap will display the data according to those parameters. A ranking bar will be placed on the side, so users can easily search for where a specific metro area stands.
+Our overall goal is a create an interactive heat map based on a specific data set. The website will initially show one data set, such as the Commuter Stress Index. A default year will be selected and the heatmap will display the data according to those parameters.
 
-The user can change what data set is displayed by clicking on buttons on the top of the page. When the button is hovered over, a brief explanation will be given as to what the data set is. A slider is located beneath the map to change the desired year. The heatmap will update to reflect these changes. Additionally, the ranking bar will be updated appropriately. When a user hovers over a media market, the info for that specific area in the specified year will be displayed to the side. 
+The user can change what data set is displayed by clicking on buttons on the top of the page. When the button is hovered over, a brief explanation will be given as to what the data set is. A slider is located beneath the map to change the desired year. The heatmap will update to reflect these changes. When a user hovers over a media market, the info for that specific area in the specified year will be displayed to the side. 
 
 ### D3 Utilization
 
-Each market on the map will be its own SVG element. This allows us to modify the color of the region with D3. D3 will also be used to update the info in the sidebar and the ranking bar.
+We will add event listeners thorugh D3. Each market on the map will be its own SVG element. This allows us to modify the color of the region with D3 as well. The `D3.scaleQuantize()` function will be used to scale the color values.
 
