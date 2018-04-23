@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html style="height: 100%">
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/custom.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Do+Hyeon|Open+Sans:300" rel="stylesheet">
+    <title> Teriffic Teraffic </title>
+    </head>
+  <body style="padding-top: 1rem; background-color: #ffcc99;">
+  <center>
+  <h1 class="display-4"> TRAFFIC INFORMATION BY MEDIA MARKETS </h1>
+  <hr>
+  <p class="h6"> Terrific Teraffic </p>
+  <br>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <button type="button" class="data-button btn btn-danger categorybtn" id='mpv'> Miles Per Vehicle </button>
+      </div>
+      <div class="col">
+        <button type="button" class="data-button btn btn-warning categorybtn" id='acc'> Annual Congestion Cost </button>
+      </div>
+      <div class="col">
+        <button type="button" class="data-button btn btn-success categorybtn" id='csi'> Commuter Stress Index </button>
+      </div>
+      <div class="col">
+        <button type="button" class="data-button btn btn-warning categorybtn" id='ahd'> Annual Hours of Delay </button>
+      </div>
+      <div class="col">
+        <button type="button" class="data-button btn btn-danger categorybtn" id='efc'> Excess Fuel Consumed </button>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-9">
+        <div id="mapContainer" class="card" style="height: 500px;">
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <div class="card infobox" style="height: 160px;">
+                <div class="text-left">
+                <center> <h5 id="name" style="font-size: 20px;"> New York, NY </h4> </center>
+                <hr class="linethingy">
+                <p id="data" style="font-size: 14px;">
+               <!-- Miles per Vehicle:
+                <br>
+                Annual Congestion Cost:
+                <br>
+                Commuter Stress Index:
+                <br>
+                Annual Hours of Delay:
+                <br>
+                Excuess Fuel Consumed: -->
+                </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col">
+	  </div>
+          </div>
+        </div>
+      </div>
+</div>
+<br>
+    <h3 style="font-family: Do Hyeon;"> TIME </h3>
+    <div class="row">
+      <div class="col">
+        <form>
+          
+            <input  id="year" type="range" class="form-control-range" min="1982" max="2014"/>
+         
+        </form>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <p class="text-left h5"> 1982 </p>
+      </div>
+      <div class="col">
+        <p class="text-right h5"> 2014 </p>
+      </div>
+    </div>
+
+    <h3 style="font-family: Do Hyeon;"> SOURCES </h3>
+    <ul>
+	    <li><a href="https://mobility.tamu.edu/ums/">Traffic Data</a></li>
+	    <li><a href="https://github.com/simzou/nielsen-dma/">Media Martkets</a></li>
+    </ul>
+  </div>
+  </center>
+  <!-- libs -->
+  <script src="https://unpkg.com/topojson@3"></script>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- our code -->
+  <script src="static/js/main.js"></script>
+  </body>
+</html>
