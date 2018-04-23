@@ -49,6 +49,7 @@ var switchback = function(e) {
   }
 };
 
+var correlate = "Freeway Daily Vehicle-Miles of Travel";
 for (let button of document.getElementsByClassName("data-button")){
     button.addEventListener("mouseover", switchinfo);
     button.addEventListener("mouseout", switchback);
@@ -56,26 +57,27 @@ for (let button of document.getElementsByClassName("data-button")){
 	let target = e.target.id;
 	if (target === "mpv") {
 	    pressed = mpv ;
+	    correlate = "Freeway Daily Vehicle-Miles of Travel";
 	}
 	else if (target === "acc") {
 	    pressed = acc;
+	    correlate = "Annual Congestion Cost Total Dollars (million)";
 	}
 	else if (target === "csi") {
 	    pressed = csi;
+	    correlate = "Commuter Stress Index Value";
 	}
 	else if (target === "ahd") {
 	    pressed = ahd;
+	    correlate = "Annual Hours of Delay per Auto Commuter";
 	}
 	else if (target === "efc") {
 	    pressed = efc;
+	    correlate = "Annual Excess Fuel Consumed Total Gallons";
 	}
 	console.log(pressed.innerHTML);
     });
-}
-			   
-
-			   
-			   
+}			   
 			   
 			   
     
@@ -87,12 +89,11 @@ for (let button of document.getElementsByClassName("data-button")){
  */
 
 let width = 900, height = 500;
-var year;
+var year = 1998; 
 d3.select("#year")
     .on("change",function(){
-	d3.select("#data")
-	    .text(this.value);
 	console.log(this.value);
+	year = this.value; 
     });
 //should use an ajax call to get the data?
 d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/nielsentopo.json").then(data => {
@@ -140,8 +141,9 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	    console.log(d.properties.dma1);
 	    d3.select("#name")
 		.text(d.properties.dma1);
+	    getData(d.properties.dma1, year, correlate); 
 	    d3.select("#data")
-		.text( pressed.innerHTML+ ":");
+		.text( pressed.innerHTML+ ": " + value);
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
@@ -150,43 +152,19 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	.attr("fill", defaultFill);
 });
 
-var loadJSON = function(callback) {   
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json', true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-        }
-    };
-    xobj.send(null);  
-};
 
-
+var value; 
 var getData = function(area, year, type){
     d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json").then(data => {
-		console.log(data);
-		
-		for (var i = 0; i < data.length; i++) {
-			if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
-				console.log(data[i][type]);
-			}
-		}
-    });}
-    //loadJSON(function(response) {
-	// Parse JSON string into object
-	//var data = JSON.parse(response);
-	//return data;
-	//for (var i = 0; i < data.length; i++) {
-        //if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
-	//    return (data[i][type]);
-	//}
-    //}
-    //})
-//};
+	console.log(data);
+	
+	for (var i = 0; i < data.length; i++) {
+	    if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
+		value = data[i][type];
+	    }
+	}
+    });
+}
 
 
-//console.log("Nashville, TN");
-console.log(getData("Nashville, TN", 1982, "Stress index rank"));
 
