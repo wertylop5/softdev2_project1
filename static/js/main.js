@@ -17,7 +17,7 @@ var switchinfo = function(e, id) {
     mpv.innerHTML = "Average distance traveled per vehicle";
   }
   else if (target === "acc") {
-    acc.innerHTML = "Extra fuel consumed by vehicles in traffic";
+    acc.innerHTML = "Extra fuel consumed in traffic";
   }
   else if (target === "csi") {
     csi.innerHTML = "Travel time ratio, peak to off hours";
@@ -26,7 +26,7 @@ var switchinfo = function(e, id) {
     ahd.innerHTML = "Annual hours of delay per commuter";
   }
   else if (target === "efc") {
-    efc.innerHTML = "Excess fuel used per commuter (gallons)";
+    efc.innerHTML = "per commuter in gallons";
   }
 };
 
@@ -75,14 +75,14 @@ for (let button of document.getElementsByClassName("data-button")){
 	});
     });
 }
-			   
 
-			   
-			   
-			   
-			   
-    
-			   
+
+
+
+
+
+
+
 
 
 /*
@@ -95,7 +95,7 @@ const color_h = 122;
 const color_s = 62;
 let color_l;
 var defaultFill = "#aaa";
-    
+
 function colorexec(d, that) {
 	//console.log(that.value);
 	function componentToHex(c) {
@@ -137,8 +137,8 @@ function colorexec(d, that) {
 	}
 
 
-	
-		
+
+
 	if (d.properties.data != null) {
 		if (pressed.id === "mpv") {
 			let color = d3.scaleQuantize()
@@ -171,7 +171,7 @@ function colorexec(d, that) {
 				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
 			color_l = color(d.properties.data[year]["Annual Excess Fuel Consumed Total Gallons"]);
 		}
-	
+
 		d3.select(that)
 		.attr("fill",hsltohex(color_h, color_s, 100-color_l));
 	}
@@ -203,8 +203,8 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//defines d attribute of path tag
 	//the d attribute defines a curve
 	let path = d3.geoPath(projection);
-	
-	
+
+
 	//associate data with each media market in json
 	d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json").then(traffic_data => {
 		for (let counter = 0; counter < feature.features.length; counter++) {
@@ -216,7 +216,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 				}
 			}
 		}
-		
+
 		svg.append("g")
 			.attr("id","dmas")
 			.selectAll("path")
@@ -229,7 +229,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 				.attr("fill","orange");
 				d3.select("#name")
 				.text(d.properties.dma1);
-				
+
 				if (d.properties.data != null) {
 					let temp;
 					if (pressed.id === "mpv") {
@@ -277,5 +277,3 @@ if ("createEvent" in document) {
 }
 else
     document.getElementById("year").fireEvent("onchange");
-
-

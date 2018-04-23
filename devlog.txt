@@ -20,7 +20,7 @@ linS -- 2018-04-12 21:07:29
 added POC of media market map
 
 liK -- 2018-04-16 14:43:37
-changed base
+altered the base layout for larger map
 
 korsunM -- 2018-04-17 14:44:19
 added mouseoverfunction to the map
@@ -35,7 +35,7 @@ korsunM -- 2018-04-18 14:37:15
 got names printing
 
 liK -- 2018-04-18 14:51:29
-fixed more stuff
+more work on the html/css and colors
 
 linS -- 2018-04-18 20:24:79
 fixed naming of metro areas
@@ -67,3 +67,5 @@ fixed heatmap colors
 linS -- 2018-04-23 02:36:38
 update README
 
+liK -- 2018-04-23 03:21:09
+fixed text overlap problems and minor changes
