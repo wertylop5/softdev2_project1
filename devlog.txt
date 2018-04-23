@@ -61,3 +61,9 @@ updated README
 korsunM -- 2018-04-22 22:53:19
 pair programming to be BLE TO PULL DATA FROM json
 
+linS -- 2018-04-23 02:36:31
+fixed heatmap colors
+
+linS -- 2018-04-23 02:36:38
+update README
+
