@@ -25,6 +25,9 @@ altered the base layout for larger map
 korsunM -- 2018-04-17 14:44:19
 added mouseoverfunction to the map
 
+ngA -- 2018-04-17 14:44:49
+highlight on mouseover
+
 linS -- 2018-04-17 14:45:37
 fixed map dimensions
 
@@ -33,6 +36,9 @@ added json version of csv
 
 korsunM -- 2018-04-18 14:37:15
 got names printing
+
+ngA -- 2018-04-18 14:38:11
+pull area name on mouseover
 
 liK -- 2018-04-18 14:51:29
 more work on the html/css and colors
@@ -52,6 +58,9 @@ added descriptions to buttons
 korsunM -- 2018-04-20 14:48:42
 gets data from the year slider into the map
 
+ngA -- 2018-04-20 14:50:02
+work on reading data from json 
+
 linS -- 2018-04-22 18:30:28
 fixed misnamed media market
 
@@ -60,6 +69,9 @@ updated README
 
 korsunM -- 2018-04-22 22:53:19
 pair programming to be BLE TO PULL DATA FROM json
+
+ngA -- 2018-04-22 23:47:26
+displaying correct data based on urban area, year, datatype
 
 linS -- 2018-04-23 02:36:31
 fixed heatmap colors
