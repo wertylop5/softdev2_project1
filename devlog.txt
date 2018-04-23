@@ -58,3 +58,6 @@ fixed misnamed media market
 linS -- 2018-04-22 19:28:44
 updated README
 
+korsunM -- 2018-04-22 22:53:19
+pair programming to be BLE TO PULL DATA FROM json
+

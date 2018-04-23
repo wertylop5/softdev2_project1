@@ -165,17 +165,28 @@ var loadJSON = function(callback) {
 
 
 var getData = function(area, year, type){
-    loadJSON(function(response) {
+    d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json").then(data => {
+		console.log(data);
+		
+		for (var i = 0; i < data.length; i++) {
+			if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
+				console.log(data[i][type]);
+			}
+		}
+    });}
+    //loadJSON(function(response) {
 	// Parse JSON string into object
-	var data = JSON.parse(response);
-	for (var i = 0; i < data.length; i++) {
-            if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
-		console.log(data[i][type]);
-	    }
-	}
-    })
-};
+	//var data = JSON.parse(response);
+	//return data;
+	//for (var i = 0; i < data.length; i++) {
+        //if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
+	//    return (data[i][type]);
+	//}
+    //}
+    //})
+//};
+
 
 //console.log("Nashville, TN");
-getData("Nashville, TN", 1982, "Stress index rank");
+console.log(getData("Nashville, TN", 1982, "Stress index rank"));
 
