@@ -23,7 +23,7 @@ var switchinfo = function(e, id) {
     csi.innerHTML = "Travel time ratio, peak to off hours";
   }
   else if (target === "ahd") {
-    ahd.innerHTML = "Total hours of delay per year";
+    ahd.innerHTML = "Annual hours of delay per commuter";
   }
   else if (target === "efc") {
     efc.innerHTML = "Excess fuel used per commuter (gallons)";
@@ -69,7 +69,7 @@ for (let button of document.getElementsByClassName("data-button")){
 	else if (target === "efc") {
 	    pressed = efc;
 	}
-	console.log(pressed.innerHTML);
+	//console.log(pressed.innerHTML);
 	d3.select("#mapContainer").select("svg").select("g").selectAll("path").each((d, i, nodes) => {
 		colorexec(d, nodes[i]);
 	});
@@ -95,16 +95,6 @@ const color_h = 122;
 const color_s = 62;
 let color_l;
 var defaultFill = "#aaa";
-/*
-d3.select("#year")
-    .on("change",function(){
-	//d3.select("#data")
-	//    .text(this.value);
-	console.log(this.value);
-	year = parseInt(this.value);
-	
-    });
-  */  
     
 function colorexec(d, that) {
 	//console.log(that.value);
@@ -143,36 +133,47 @@ function colorexec(d, that) {
 	}
 	function hsltohex(h, s, l) {
 		let temp = hslToRgb(h/360, s/100, l/100);
-		//console.log(temp[0], temp[1], temp[2]);
 		return rgbToHex(temp[0], temp[1], temp[2]);
 	}
 
 
+	
+		
 	if (d.properties.data != null) {
 		if (pressed.id === "mpv") {
-			color_l = d.properties.data[year]["Arterial Street Daily Vehicle-Miles of Travel"] +
-				d.properties.data[year]["Freeway Daily Vehicle-Miles of Travel"] * .001;
-		
+			let color = d3.scaleQuantize()
+				.domain([2000, 280000])
+				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
+			color_l = color((d.properties.data[year]["Arterial Street Daily Vehicle-Miles of Travel"] +
+				d.properties.data[year]["Freeway Daily Vehicle-Miles of Travel"]));
 		}
 		else if (pressed.id === "acc") {
-			color_l = d.properties.data[year]["Annual Congestion Cost Total Dollars (million)"];
+			let color = d3.scaleQuantize()
+				.domain([0, 20000])
+				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
+			color_l = color(d.properties.data[year]["Annual Congestion Cost Total Dollars (million)"]);
 		}
 		else if (pressed.id === "csi") {
-			color_l = d.properties.data[year]["Commuter Stress Index Value"];
+			let color = d3.scaleQuantize()
+				.domain([1, 2])
+				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
+			color_l = color(d.properties.data[year]["Commuter Stress Index Value"]);
 		}
 		else if (pressed.id === "ahd") {
-			color_l = d.properties.data[year]["Annual Hours of Delay per Auto Commuter"];
+			let color = d3.scaleQuantize()
+				.domain([0, 90])
+				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
+			color_l = color(d.properties.data[year]["Annual Hours of Delay per Auto Commuter"]);
 		}
 		else if (pressed.id === "efc") {
-			color_l = d.properties.data[year]["Annual Excess Fuel Consumed Total Gallons"];
+			let color = d3.scaleQuantize()
+				.domain([0, 300000])
+				.range([10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90]);
+			color_l = color(d.properties.data[year]["Annual Excess Fuel Consumed Total Gallons"]);
 		}
 	
-		color_l = color_l % 100;
-		console.log(hsltohex(color_h, color_s, color_l));
-	
 		d3.select(that)
-		.attr("fill",hsltohex(color_h, color_s, color_l));
-		console.log("done");
+		.attr("fill",hsltohex(color_h, color_s, 100-color_l));
 	}
 	else {
 		d3.select(that)
@@ -181,7 +182,7 @@ function colorexec(d, that) {
 }
 //should use an ajax call to get the data?
 d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/nielsentopo.json").then(data => {
-	console.log("printing data");
+	//console.log("printing data");
 	//console.log(data);
 
 	let svg = d3.select("#mapContainer").append("svg")
@@ -191,8 +192,8 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//convert topojson to geojson
 	//features property is what has the actual data
 	let feature = topojson.feature(data, data.objects.nielsen_dma);
-	console.log("printing feature");
-	console.log(feature);
+	//console.log("printing feature");
+	//console.log(feature);
 
 	//defines the map projection to be used
 	//will attempt to fit the projection based on the geojson object
@@ -202,8 +203,6 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//defines d attribute of path tag
 	//the d attribute defines a curve
 	let path = d3.geoPath(projection);
-	//console.log("printing path");
-	//console.log(path);
 	
 	
 	//associate data with each media market in json
@@ -211,16 +210,12 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 		for (let counter = 0; counter < feature.features.length; counter++) {
 			let prop = feature.features[counter].properties;
 			for (let traffic_item of traffic_data) {
-				//console.log(traffic_item);
 				if (traffic_item["Urban Area"] === prop["dma1"]) {
 					if (prop.data == null) prop.data = {};
 					prop.data[traffic_item["Year"]] = traffic_item;
 				}
 			}
 		}
-		console.log(feature.features[59].properties);
-		console.log("traffic data");
-		console.log(traffic_data);
 		
 		svg.append("g")
 			.attr("id","dmas")
@@ -232,7 +227,6 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 			.on("mouseover", function(d){
 				d3.select(this)
 				.attr("fill","orange");
-				console.log(d.properties);
 				d3.select("#name")
 				.text(d.properties.dma1);
 				
@@ -268,7 +262,6 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 			.attr("fill", defaultFill);
 			d3.select("#year")
 			.on("change",function(){
-				console.log(this.value);
 				year = parseInt(this.value);
 				svg.select("g").selectAll("path").each((d, i, nodes) => {
 					colorexec(d, nodes[i]);
