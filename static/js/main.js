@@ -97,7 +97,7 @@ d3.select("#year")
 //should use an ajax call to get the data?
 d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/nielsentopo.json").then(data => {
 	console.log("printing data");
-	console.log(data);
+	//console.log(data);
 
 	let svg = d3.select("#mapContainer").append("svg")
 		.attr("width", width)
@@ -107,14 +107,14 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//features property is what has the actual data
 	let feature = topojson.feature(data, data.objects.nielsen_dma);
 	console.log("printing feature");
-	console.log(feature);
+	//console.log(feature);
 
 	//if lines overlap, only draw one of them
 	//returns an object containing an array that defines the lines
 	let mesh = topojson.mesh(data, data.objects.nielsen_dma,
 			(a, b) => true);
 	console.log("printing mesh");
-	console.log(mesh);
+	//console.log(mesh);
 
 	//defines the map projection to be used
 	//will attempt to fit the projection based on the geojson object
@@ -125,7 +125,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	//the d attribute defines a curve
 	let path = d3.geoPath(projection);
 	console.log("printing path");
-	console.log(path);
+	//console.log(path);
     var defaultFill = "#aaa";
     svg.append("g")
 	.attr("id","dmas")
@@ -141,13 +141,41 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	    d3.select("#name")
 		.text(d.properties.dma1);
 	    d3.select("#data")
-		.html( pressed.innerHTML+ ":");
+		.text( pressed.innerHTML+ ":");
 	})
         .on("mouseout", function(d){
 	    d3.select(this)
 		.attr("fill",defaultFill);
 	})
 	.attr("fill", defaultFill);
-    
-	
 });
+
+var loadJSON = function(callback) {   
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', 'https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json', true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+        if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+        }
+    };
+    xobj.send(null);  
+};
+
+
+var getData = function(area, year, type){
+    loadJSON(function(response) {
+	// Parse JSON string into object
+	var data = JSON.parse(response);
+	for (var i = 0; i < data.length; i++) {
+            if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
+		console.log(data[i][type]);
+	    }
+	}
+    })
+};
+
+//console.log("Nashville, TN");
+getData("Nashville, TN", 1982, "Stress index rank");
+
