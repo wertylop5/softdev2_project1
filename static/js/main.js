@@ -70,6 +70,9 @@ for (let button of document.getElementsByClassName("data-button")){
 	    pressed = efc;
 	}
 	console.log(pressed.innerHTML);
+	d3.select("#mapContainer").select("svg").select("g").selectAll("path").each((d, i, nodes) => {
+		colorexec(d, nodes[i]);
+	});
     });
 }
 			   
@@ -88,13 +91,94 @@ for (let button of document.getElementsByClassName("data-button")){
 
 let width = 900, height = 500;
 var year =1997;
+const color_h = 122;
+const color_s = 62;
+let color_l;
+var defaultFill = "#aaa";
+/*
 d3.select("#year")
     .on("change",function(){
 	//d3.select("#data")
 	//    .text(this.value);
 	console.log(this.value);
 	year = parseInt(this.value);
+	
     });
+  */  
+    
+function colorexec(d, that) {
+	//console.log(that.value);
+	function componentToHex(c) {
+		var hex = c.toString(16);
+		return hex.length == 1 ? "0" + hex : hex;
+	}
+
+	function rgbToHex(r, g, b) {
+		return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+	}
+
+	function hslToRgb(h, s, l){
+		var r, g, b;
+
+		if(s == 0){
+			r = g = b = l; // achromatic
+		}else{
+			var hue2rgb = function hue2rgb(p, q, t){
+				if(t < 0) t += 1;
+				if(t > 1) t -= 1;
+				if(t < 1/6) return p + (q - p) * 6 * t;
+				if(t < 1/2) return q;
+				if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
+				return p;
+			}
+
+			var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+			var p = 2 * l - q;
+			r = hue2rgb(p, q, h + 1/3);
+			g = hue2rgb(p, q, h);
+			b = hue2rgb(p, q, h - 1/3);
+		}
+
+		return [Math.round(r * 255), Math.round(g * 255), Math.round(b * 255)];
+	}
+	function hsltohex(h, s, l) {
+		let temp = hslToRgb(h/360, s/100, l/100);
+		//console.log(temp[0], temp[1], temp[2]);
+		return rgbToHex(temp[0], temp[1], temp[2]);
+	}
+
+
+	if (d.properties.data != null) {
+		if (pressed.id === "mpv") {
+			color_l = d.properties.data[year]["Arterial Street Daily Vehicle-Miles of Travel"] +
+				d.properties.data[year]["Freeway Daily Vehicle-Miles of Travel"] * .001;
+		
+		}
+		else if (pressed.id === "acc") {
+			color_l = d.properties.data[year]["Annual Congestion Cost Total Dollars (million)"];
+		}
+		else if (pressed.id === "csi") {
+			color_l = d.properties.data[year]["Commuter Stress Index Value"];
+		}
+		else if (pressed.id === "ahd") {
+			color_l = d.properties.data[year]["Annual Hours of Delay per Auto Commuter"];
+		}
+		else if (pressed.id === "efc") {
+			color_l = d.properties.data[year]["Annual Excess Fuel Consumed Total Gallons"];
+		}
+	
+		color_l = color_l % 100;
+		console.log(hsltohex(color_h, color_s, color_l));
+	
+		d3.select(that)
+		.attr("fill",hsltohex(color_h, color_s, color_l));
+		console.log("done");
+	}
+	else {
+		d3.select(that)
+		.attr("fill",defaultFill);
+	}
+}
 //should use an ajax call to get the data?
 d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/nielsentopo.json").then(data => {
 	console.log("printing data");
@@ -110,15 +194,6 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	console.log("printing feature");
 	console.log(feature);
 
-	//if lines overlap, only draw one of them
-	//returns an object containing an array that defines the lines
-	/*
-	let mesh = topojson.mesh(data, data.objects.nielsen_dma,
-			(a, b) => true);
-	console.log("printing mesh");
-	console.log(mesh);
-	*/
-
 	//defines the map projection to be used
 	//will attempt to fit the projection based on the geojson object
 	let projection = d3.geoAlbers()
@@ -129,7 +204,7 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 	let path = d3.geoPath(projection);
 	//console.log("printing path");
 	//console.log(path);
-	var defaultFill = "#aaa";
+	
 	
 	//associate data with each media market in json
 	d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json").then(traffic_data => {
@@ -186,34 +261,28 @@ d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/da
 					d3.select("#data")
 						.text( "No data available");
 				}
-				//d3.select("#data")
-				//.text( pressed.innerHTML+ ":"d.properties.data[year][);
-				//getData(d.properties.dma1, year, pressed.innerHTML);
 			})
 			.on("mouseout", function(d){
-				d3.select(this)
-				.attr("fill",defaultFill);
+				colorexec(d, this);
 			})
 			.attr("fill", defaultFill);
+			d3.select("#year")
+			.on("change",function(){
+				console.log(this.value);
+				year = parseInt(this.value);
+				svg.select("g").selectAll("path").each((d, i, nodes) => {
+					colorexec(d, nodes[i]);
+				});
+			});
 	});
 });
 
-var getData = function(area, year, type){
-    d3.json("https://raw.githubusercontent.com/wertylop5/softdev2_project1/master/data/new-data.json").then(data => {
-		//console.log(data);
-		
-		for (var i = 0; i < data.length; i++) {
-			if (data[i]["Urban Area"] == area && data[i]["Year"] == year) {
-				console.log(data[i][type]);
-				d3.select("#data")
-					.text( pressed.innerHTML+ ":"+data[i][type])
-			}
-		}
-    });
+if ("createEvent" in document) {
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent("change", false, true);
+    document.getElementById("year").dispatchEvent(evt);
 }
+else
+    document.getElementById("year").fireEvent("onchange");
 
-
-
-//console.log("Nashville, TN");
-//console.log(getData("Nashville, TN", 1982, "Stress index rank"));
 
